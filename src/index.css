@@ -1,13 +1,235 @@
-body {
+/* Importing fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Setting global CSS rules */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  padding: 0;
+}
+
+/* Setting font for the entire page */
+body {
+  font-family: 'Outfit', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Setting font size for paragraphs */
+p {
+  font-size: 0.8rem;
+}
+
+.arrow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Setting font size for heading level 1 */
+h1 {
+  font-size: 4rem;
+}
+
+/* Setting styles for the main container */
+.container {
+  max-width: 700px;
+  height: 100vh;
+  margin: auto;
+  padding: 0 0.8rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Setting styles for the top section */
+.top {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0.5rem auto;
+}
+
+/* Setting styles for the location section in the top section */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Setting styles for the search bar section in the top section */
+.top .nav-bar .search{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+/* Setting styles for the search bar input section in the top section */
+.top .nav-bar input {
+  outline: none;
+  width: 10em;
+  padding: 0.6em;
+  font-size: 0.7rem;
+  border: none;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  margin: 3px;
+}
+
+/* Indicates that that the icon is a clickable */
+.top .nav-bar .search-icon {
+  cursor: pointer;
+}
+
+/* Setting styles for the search bar input section in the top section */
+::placeholder {
+  color: white;
+}
+
+/* Setting styles for the nav section to be able to add more icons if needed in a column */
+.top .top-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* Indicates that that the icon is a clickable */
+.top .top-icon .temp-icon{
+  cursor: pointer;
+}
+
+/* Setting styles for the info section in the top section */
+.top .currentWeather{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+/* Setting styles for the "hot" temperature text in the top section */
+.top .top-tempHot{
+  background-image: linear-gradient(rgb(161 98 7),rgb(194 65 12));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Setting styles for the "cold" temperature text in the top section */
+.top .top-tempCold{
+  background-image: linear-gradient(rgb(14 116 144),rgb(29 78 216));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Setting styles for the weather info in the top section */
+.top .currentWeather .weather-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+/* Increase the size of current weather icon  */
+.top img {
+  width: 5rem;
+}
+
+/* Setting styles for the weather stats in the top section */
+.weather-stats {
+  margin-bottom: 1em;
+}
+
+/* Setting styles for the bottom section */
+.bottom-info{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border-radius: 12px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* Setting styles for the header in the bottom section */
+.bottom-header{
+  margin-bottom: 0.6em;
+}
+
+/* Setting styles for the data section in the bottom section */
+.bottom-data {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Increase the size of icons in forecasts */
+.bottom-info img {
+  width: 3rem;
+}
+
+/* The text appear bold */
+.bold {
+  font-weight: 700;
+}
+
+/* Setting styles for the tfl section in the bottom section */
+.tfl-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Setting styles for the tfl section in the bottom section */
+.tfl-container p{
+  font-size: 0.6rem;
+  padding: 5px;
+}
+
+/* Some icons and font sizes appear smaller on screens < 600 to fit on screen */
+@media only screen and (max-height:600px){
+
+  /* Setting font size for paragraphs */
+  p {
+    font-size: 0.7rem;
+  }
+
+  /* Setting font size for heading level 1 */
+  h1 {
+    font-size: 3rem;
+  }
+
+  /* Increase the size of current weather icon  */
+  .top img {
+    width: 3rem;
+  }
+
+  /* Setting styles for the header in the bottom section */
+  .bottom-header{
+    margin-bottom: 0.4em;
+  }
+
+  /* Setting styles for the weather stats in the top section */
+  .weather-stats {
+    margin-bottom: 0em;
+  }
+  
+  
 }

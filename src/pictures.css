@@ -1,0 +1,66 @@
+.imageCloudy_d {
+    background: url('./pictures/cloudy_d.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.imageCloudy_n {
+    background: url('./pictures/cloudy_n.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageMist_d {
+    background: url('./pictures/mist_d.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.imageMist_n {
+    background: url('./pictures/mist_n.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageNight {
+    background: url('./pictures/night.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageRain_d {
+    background: url('./pictures/rain_d.jpg') no-repeat center center/cover;
+    color: #fff;
+    
+}
+
+.imageRain_n {
+    background: url('./pictures/rain_n.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageSnow_d {
+    background: url('./pictures/snow_d.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.imageSnow_n {
+    background: url('./pictures/snow_n.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageSunny {
+    background: url('./pictures/sunny.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+
+.imageThunderstorm_d {
+    background: url('./pictures/thunderstorm_d.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.imageThunderstorm_n {
+    background: url('./pictures/thunderstorm_n.jpg') no-repeat center center/cover;
+    color: #fff;
+}

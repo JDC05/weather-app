@@ -22,7 +22,6 @@ p {
   font-size: 0.8rem;
 }
 
-/* Displays the arrows in the weekly forecast section */
 .arrow{
   display: flex;
   align-items: center;
@@ -230,6 +229,12 @@ h1 {
   /* Setting styles for the weather stats in the top section */
   .weather-stats {
     margin-bottom: 0em;
+  }
+
+  /* Setting styles for the tfl section in the bottom section */
+  .tfl-container p{
+    font-size: 0.5rem;
+    padding: 5px;
   }
   
   

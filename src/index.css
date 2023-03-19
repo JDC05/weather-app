@@ -22,6 +22,7 @@ p {
   font-size: 0.8rem;
 }
 
+/* Displays the arrows in the weekly forecast section */
 .arrow{
   display: flex;
   align-items: center;

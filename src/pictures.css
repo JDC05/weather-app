@@ -1,3 +1,5 @@
+/* Each class had a different background picture depending on the weather */
+
 .imageCloudy_d {
     background: url('./pictures/cloudy_d.jpg') no-repeat center center/cover;
     color: #fff;

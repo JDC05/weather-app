@@ -3,7 +3,6 @@ import {UilTemperature, UilSearch, UilArrowUp, UilArrowDown} from "@iconscout/re
 
 const API_KEY = '33a24b52f5870d8876793215201329ab';
 
-// Displays the current date and time, and updates itself every second.
 function App() {
   const [weather, setCurrentWeather] = useState({});
   const [forecast, setWeatherForecast] = useState([]);
@@ -12,6 +11,7 @@ function App() {
   const [serviceData, setServiceData] = useState([]);
 
 
+  // Calls the weather and TFL api when app first renders
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       try {
@@ -148,6 +148,7 @@ function App() {
     }
   };
 
+  // Calls the weather API given the location
   const handleSearchClickLocation = async () => {
     if (city !== '') {
       try {
@@ -176,18 +177,19 @@ function App() {
           <div className="nav-bar">
 
             <div className='search'>
-                <input
-                type="text"
-                placeholder='Location'
-                value={city}
-                onChange={(e) => setCity(e.currentTarget.value)}
-                />
-                <UilSearch size={20} className="search-icon" onClick={handleSearchClickLocation}/>
+              <input
+              type="text"
+              placeholder='Location'
+              value={city}
+              onChange={(e) => setCity(e.currentTarget.value)}
+              />
+              <UilSearch size={20} className="search-icon" onClick={handleSearchClickLocation}/>
             </div>
             
             <div className='top-icon'>
-            <UilTemperature className='temp-icon' onClick={toggleTemperatureUnit}/>       
-            </div>            
+              <UilTemperature className='temp-icon' onClick={toggleTemperatureUnit}/>       
+            </div> 
+
           </div>
 
 
@@ -195,7 +197,7 @@ function App() {
 
             <div className='temperature'>
               <div className={formatTempBackground()}>
-              {weather.main ? <h1>{formatTemp(weather.main.temp)}</h1> : null}
+                {weather.main ? <h1>{formatTemp(weather.main.temp)}</h1> : null}
               </div>
 
               <div className='weather-info'>
@@ -213,6 +215,7 @@ function App() {
               {weather.wind ? <p className='bold'>Wind: {weather.wind.speed} m/s</p>: null} 
 
             </div>
+
           </div>
         
         </div>
@@ -220,9 +223,11 @@ function App() {
         <div className='bottom'>
 
           <div className='bottom-info'>
+
             <div className='bottom-header'>
               <p className='bold'>TFL Services</p>
             </div>
+
             <div className='tfl-container'>
               <p style={{backgroundColor: "#B36305"}} className='bold'>{serviceData[0]?.lineStatuses[0].statusSeverityDescription}</p>
               <p style={{backgroundColor: "#E32017"}} className='bold'>{serviceData[1]?.lineStatuses[0].statusSeverityDescription}</p>
@@ -239,6 +244,7 @@ function App() {
               <p style={{backgroundColor: "#0098D4"}} className='bold'>{serviceData[12]?.lineStatuses[0].statusSeverityDescription}</p>
               <p style={{backgroundColor: "#95CDBA"}} className='bold'>{serviceData[13]?.lineStatuses[0].statusSeverityDescription}</p>
             </div>
+
           </div>
           
 
@@ -261,7 +267,9 @@ function App() {
           </div>
 
         </div>
+
       </div>
+
     </div>
   );
 }

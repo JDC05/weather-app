@@ -22,13 +22,7 @@ p {
   font-size: 0.8rem;
 }
 
-.arrow{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Setting font size for heading level 1 */
+/* Setting font size current temperature */
 h1 {
   font-size: 4rem;
 }
@@ -151,7 +145,7 @@ h1 {
   width: 5rem;
 }
 
-/* Setting styles for the weather stats in the top section */
+/* Setting styles for the current weather stats in the top section */
 .weather-stats {
   margin-bottom: 1em;
 }
@@ -173,22 +167,6 @@ h1 {
   margin-bottom: 0.6em;
 }
 
-/* Setting styles for the data section in the bottom section */
-.bottom-data {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-/* Increase the size of icons in forecasts */
-.bottom-info img {
-  width: 3rem;
-}
-
-/* The text appear bold */
-.bold {
-  font-weight: 700;
-}
-
 /* Setting styles for the tfl section in the bottom section */
 .tfl-container{
   display: flex;
@@ -201,6 +179,29 @@ h1 {
 .tfl-container p{
   font-size: 0.6rem;
   padding: 5px;
+}
+
+/* Setting styles for the data section in the bottom section */
+.bottom-data {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* change the size of icons in forecasts */
+.bottom-info img {
+  width: 3rem;
+}
+
+/* Setting the arrows for the weekly forecast */
+.arrow{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The text appear bold */
+.bold {
+  font-weight: 700;
 }
 
 /* Some icons and font sizes appear smaller on screens < 600 to fit on screen */

@@ -1,50 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import {UilTemperature, UilSearch, UilArrowUp, UilArrowDown} from "@iconscout/react-unicons"
 
-const API_KEY = '33a24b52f5870d8876793215201329ab';
+const API_KEY = '33a24b52f5870d8876793215201329ab'
 
 function App() {
-  const [weather, setCurrentWeather] = useState({});
-  const [forecast, setWeatherForecast] = useState([]);
-  const [isCelsius, setIsCelsius] = useState(true);
-  const [city, setCity] = useState("");
-  const [serviceData, setServiceData] = useState([]);
+  const [weather, setCurrentWeather] = useState({})
+  const [forecast, setWeatherForecast] = useState([])
+  const [isCelsius, setIsCelsius] = useState(true)
+  const [city, setCity] = useState("")
+  const [serviceData, setServiceData] = useState([])
 
 
   // Calls the weather and TFL api when app first renders
   useEffect(() => {
+    // Obtains the location of user
     navigator.geolocation.getCurrentPosition(async (position) => {
       try {
-        const { latitude, longitude } = position.coords;
-        const currentWeatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
-        const currentWeatherData = await currentWeatherResponse.json();
-        const weatherForecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
-        const weatherForecastData = await weatherForecastResponse.json();
-        setCurrentWeather(currentWeatherData);
-        setWeatherForecast(weatherForecastData);
+
+        const { latitude, longitude } = position.coords
+        const currentWeatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
+        const currentWeatherData = await currentWeatherResponse.json()
+        const weatherForecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
+        const weatherForecastData = await weatherForecastResponse.json()
+        setCurrentWeather(currentWeatherData)
+        setWeatherForecast(weatherForecastData)
+
+        //Obtains the tfl services 
         fetch('https://api.tfl.gov.uk/Line/Mode/tube%2Cdlr%2Coverground%2Ctram/Status')
         .then(response => response.json())
         .then(data => setServiceData(data))
+
       } catch (error) {
         console.log(error)
       }
-    });
-  }, []);
+    })
+  }, [])
 
-  // When the user clicks on the temp-icon button, this function is called
-  const toggleTemperatureUnit = () => {
-    setIsCelsius(!isCelsius);
-  };
-
-  // Temperature is formatted with °C symbol if isCelsius is true and °F otherwise
-  const formatTemp = (temp) => {
-    return isCelsius ? temp.toFixed() + '°C' : convertToFahrenheit(temp).toFixed() + '°F';
-  };
-
-  // converts temperature between celsius or fahrenheit
-  const convertToFahrenheit = (temp) => {
-    return (temp * 9/5) + 32;
-  };
+  // Calls the weather API given the location from the search bar
+  const handleSearchClickLocation = async () => {
+    if (city !== '') {
+      try {
+        const currentWeatherResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&`
+        )
+        const currentWeatherData = await currentWeatherResponse.json()
+        const weatherForecastResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&`
+        )
+        const weatherForecastData = await weatherForecastResponse.json()
+        setCurrentWeather(currentWeatherData)
+        setWeatherForecast(weatherForecastData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   // Returns a string representing the class name of the background image for the component. 
   // Maps the weather icon code to the corresponding background image.
@@ -67,6 +77,21 @@ function App() {
     
   }
 
+  // When the user clicks on the temp-icon button, this function is called
+  const toggleTemperatureUnit = () => {
+    setIsCelsius(!isCelsius)
+  }
+
+  // Temperature is formatted with °C symbol if isCelsius is true and °F otherwise
+  const formatTemp = (temp) => {
+    return isCelsius ? temp.toFixed() + '°C' : convertToFahrenheit(temp).toFixed() + '°F'
+  }
+
+  // converts temperature between celsius or fahrenheit
+  const convertToFahrenheit = (temp) => {
+    return (temp * 9/5) + 32
+  }
+
   // Returns a string representing the class name for the temperature display. It returns "top-tempCold" 
   // if the current temperature is less than 20 degrees Celsius and "top-tempHot" otherwise.
   const formatTempBackground = () => {
@@ -76,23 +101,23 @@ function App() {
     return null
   }
 
-  // Converts the argument to a the hour format with AM/PM
+  // Converts the argument to the hour format with AM/PM
   const formatTime = (timestamp) => {
-    const date = new Date(timestamp * 1000);
-    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-    const time = date.toLocaleString('en-US', options);
-    return time;
+    const date = new Date(timestamp * 1000)
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true }
+    const time = date.toLocaleString('en-US', options)
+    return time
   }
 
   // Converts the argument into the respective week day
   const getDayOfWeek = (dateString) => {
-    const date = new Date(dateString);
-    const options = { weekday: 'short' };
-    const dayOfWeek = date.toLocaleDateString(undefined, options);
-    return dayOfWeek;
+    const date = new Date(dateString)
+    const options = { weekday: 'short' }
+    const dayOfWeek = date.toLocaleDateString(undefined, options)
+    return dayOfWeek
   }
 
-  // Renders an hourly forecast for the current weather which contains the time, temp and weather icon
+  // Renders a hourly forecast for the current weather which contains the time, temp and weather icon
   const renderForecastHourly = () => {
     if(forecast.list) {
       return forecast.list.slice(0, 4).map((item) => {
@@ -102,21 +127,21 @@ function App() {
             <img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}.png`} alt=""/>
             <p>{formatTemp(item.main.temp)}</p>          
           </div>
-        );
-      });
+        )
+      })
     }   
-  };
+  }
 
   // Renders a daily forecast for the current weather which contains the time, temp and weather icon
   const renderForecastDaily = () => {
     if (forecast.list) {
-      const dailyForecast = [];
-      let currentDay = new Date(forecast.list[0].dt_txt).getDate();
-      let minTemp = Infinity;
-      let maxTemp = -Infinity;
+      const dailyForecast = []
+      let currentDay = new Date(forecast.list[0].dt_txt).getDate()
+      let minTemp = Infinity
+      let maxTemp = -Infinity
   
       forecast.list.forEach((item) => {
-        const day = new Date(item.dt_txt).getDate();
+        const day = new Date(item.dt_txt).getDate()
   
         if (day !== currentDay) {
           dailyForecast.push({
@@ -124,16 +149,16 @@ function App() {
             minTemp: formatTemp(minTemp),
             maxTemp: formatTemp(maxTemp),
             icon: item.weather[0].icon,
-          });
+          })
   
-          minTemp = Infinity;
-          maxTemp = -Infinity;
-          currentDay = day;
+          minTemp = Infinity
+          maxTemp = -Infinity
+          currentDay = day
         }
   
-        minTemp = Math.min(minTemp, item.main.temp_min);
-        maxTemp = Math.max(maxTemp, item.main.temp_max);
-      });
+        minTemp = Math.min(minTemp, item.main.temp_min)
+        maxTemp = Math.max(maxTemp, item.main.temp_max)
+      })
   
       return dailyForecast.map((item, index) => {
         return (
@@ -143,30 +168,10 @@ function App() {
             <p className='arrow'><UilArrowUp size={15}/>{item.maxTemp}</p>
             <p className='arrow'><UilArrowDown size={15}/>{item.minTemp}</p>        
           </div>
-        );
-      });
+        )
+      })
     }
-  };
-
-  // Calls the weather API given the location
-  const handleSearchClickLocation = async () => {
-    if (city !== '') {
-      try {
-        const currentWeatherResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&`
-        );
-        const currentWeatherData = await currentWeatherResponse.json();
-        const weatherForecastResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric&`
-        );
-        const weatherForecastData = await weatherForecastResponse.json();
-        setCurrentWeather(currentWeatherData);
-        setWeatherForecast(weatherForecastData);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  }
 
   return (
     <div className={formatBackground()}>
@@ -271,7 +276,7 @@ function App() {
       </div>
 
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
